@@ -1,22 +1,27 @@
-export default function Child({ setLogIn }) {
+import React from "react";
+
+export default function Child({ isLoggedIn, setLogIn }) {
+  const handleSubmit = (e) => {
+    e.preventDefault(); // prevent form reload
+    setLogIn(true);
+  };
+
+  // show form only if not logged in
+  if (isLoggedIn) {
+    return null;
+  }
+
   return (
     <div>
-      <form>
-        <label for="name">UserName:</label>
-        <input id="name" required type="text"></input>
-        <br></br>
-        <br></br>
-        <label for="word">Password:</label>
-        <input id="word" required type="password"></input>
-        <br></br>
-        <br></br>
-        <input
-          type="submit"
-          value="Log In"
-          onClick={() => {
-            setLogIn(true);
-          }}
-        ></input>
+      <h2>Child Component</h2>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="name">UserName:</label>
+        <input id="name" type="text" />
+
+        <label htmlFor="word">Password:</label>
+        <input id="word" type="password" />
+
+        <button type="submit">Log in</button>
       </form>
     </div>
   );
